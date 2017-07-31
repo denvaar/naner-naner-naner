@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
 
-import { ItemTypes } from '../constants';
+import { ItemTypes, TILE_SIZE } from '../constants';
 import { snapToGrid } from '../utils';
 import Tile from './tile';
 
+
+const SQUARE_STYLES = {
+  width: `${TILE_SIZE}px`,
+  height: `${TILE_SIZE}px`
+};
 
 const gridTarget = {
 	drop(props, monitor, component) {
@@ -30,7 +35,7 @@ class GridSquare extends Component {
     const { connectDropTarget, isOver, tile } = this.props;
 
     return connectDropTarget(
-      <div className={isOver ? "grid-square hover-over" : "grid-square"}>
+      <div style={SQUARE_STYLES} className={isOver ? "grid-square hover-over" : "grid-square"}>
         {tile ? <Tile { ...tile } /> : null}
       </div>
     );

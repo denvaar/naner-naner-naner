@@ -1,13 +1,43 @@
+import { TILE_SIZE } from './constants';
+
+
 export const snapToGrid = (x, y) => {
-  const snappedX = Math.round(x / 50) * 50;
-  const snappedY = Math.round(y / 50) * 50;
+  const snappedX = Math.round(x / TILE_SIZE) * TILE_SIZE;
+  const snappedY = Math.round(y / TILE_SIZE) * TILE_SIZE;
 
   return [snappedX, snappedY];
 }
 
 export const randomLetter = () => {
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+  const alphabet = (
+    Array(14) .join('A') +
+    Array(4)  .join('B') +
+    Array(4)  .join('C') +
+    Array(7)  .join('D') +
+    Array(19) .join('E') +
+    Array(4)  .join('F') +
+    Array(5)  .join('G') +
+    Array(4)  .join('H') +
+    Array(13) .join('I') +
+    Array(3)  .join('J') +
+    Array(3)  .join('K') +
+    Array(6)  .join('L') +
+    Array(4)  .join('M') +
+    Array(9)  .join('N') +
+    Array(13) .join('O') +
+    Array(4)  .join('P') +
+    Array(3)  .join('Q') +
+    Array(10) .join('R') +
+    Array(7)  .join('S') +
+    Array(10) .join('T') +
+    Array(7)  .join('U') +
+    Array(4)  .join('V') +
+    Array(4)  .join('W') +
+    Array(3)  .join('X') +
+    Array(4)  .join('Y') +
+    Array(3)  .join('Z')
+  );
+  //const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return alphabet[Math.floor(Math.random() * alphabet.length)];
 }
 

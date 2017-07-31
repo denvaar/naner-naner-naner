@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-dnd';
 
 import { DOWN, RIGHT } from '../constants';
 import GameBoard from './gameBoard';
+import Scoreboard from './scoreboard';
 import TilePile from './tilePile';
 import Tile from './tile';
 import {
@@ -25,6 +26,12 @@ const initialTiles = [
   { id: 7, live: false, coords: { x: -1, y: -1 } },
   { id: 8, live: false, coords: { x: -1, y: -1 } },
   { id: 9, live: false, coords: { x: -1, y: -1 } },
+  { id: 10, live: false, coords: { x: -1, y: -1 } },
+  { id: 11, live: false, coords: { x: -1, y: -1 } },
+  { id: 12, live: false, coords: { x: -1, y: -1 } },
+  { id: 13, live: false, coords: { x: -1, y: -1 } },
+  { id: 14, live: false, coords: { x: -1, y: -1 } },
+  { id: 15, live: false, coords: { x: -1, y: -1 } },
 ];
 
 const getRandom = (min, max) => Math.random() * (max - min) + min;
@@ -34,13 +41,14 @@ class GameApp extends Component {
     super(props);
 
     this.state = {
+      puzzleComplete: false,
       edges: [],
       tiles: initialTiles.map(t =>
         ({
           ...t,
           letter: randomLetter(),
-          x: getRandom(0, 670),
-          y: getRandom(0, 120),
+          x: getRandom(0, 600),
+          y: getRandom(0, 600),
           tilt: getRandom(-25, 25)
         }))
     };
@@ -113,9 +121,15 @@ class GameApp extends Component {
         ...this.state.tiles.slice(index + 1)
       ]
     }, () => this.setState({
-      puzzleComplete: (this.state.tiles.filter(t => t.live).length - this.state.edges.length) === 1,
+      puzzleComplete: this.isPuzzleComplete(),
       words: iterateEdges(this.state.edges.map(e => ({ ...e, visited: false })))
     }));
+  }
+
+  isPuzzleComplete() {
+    const liveTiles = this.state.tiles.filter(t => t.live).length;
+
+    return liveTiles > 1 && liveTiles - this.state.edges.length === 1;
   }
 
   render() {
@@ -141,6 +155,9 @@ class GameApp extends Component {
     return (
       <div>
         <GameBoard tiles={activeTiles} />
+        <Scoreboard
+          words={this.state.words}
+          puzzleComplete={this.state.puzzleComplete} />
         <TilePile tiles={inactiveTiles} />
       </div>
     );

@@ -29,12 +29,12 @@ const buildStyles = ({ live, x, y, tilt }) => {
 
 class Tile extends Component {
   render() {
-    const { connectDragSource, isDragging, x, y, tilt, letter } = this.props;
+    const { connectDragSource, isDragging, x, y, tilt, letter, live } = this.props;
     return connectDragSource(
       <div
         style={buildStyles(this.props)}
         className={isDragging ? "tile tile-dragging" : "tile"}>
-        {letter}
+        {live ? letter : null}
       </div>
     );
   }
