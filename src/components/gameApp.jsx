@@ -128,8 +128,11 @@ class GameApp extends Component {
 
   isPuzzleComplete() {
     const liveTiles = this.state.tiles.filter(t => t.live).length;
+    const vertexToEdgeDiff = liveTiles - this.state.edges.length;
 
-    return liveTiles > 1 && liveTiles - this.state.edges.length === 1;
+    console.log(vertexToEdgeDiff)
+
+    return liveTiles > 1 && vertexToEdgeDiff <= 1;
   }
 
   render() {

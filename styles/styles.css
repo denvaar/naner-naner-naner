@@ -86,10 +86,9 @@
 }
 
 .scoreboard {
+  z-index: 100;
   box-shadow: 0 2px 10px #444;
   position: absolute;
-  top: 200px;
-  left: 623px;
   font-family: 'Baloo Da', sans-serif;
   background: #fff;
   border-radius: 3px;
